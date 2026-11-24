@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uaap-universal-finance-agent"
+version = "0.1.0"
+description = "Universal Finance Agent: Ledger questions; drafts journal entries and reversals for approval."
+requires-python = ">=3.11"
+dependencies = [
+  "uaap @ git+https://github.com/qavril-labs/uaap.git@main",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "ruff>=0.5"]
+
+[project.entry-points."uaap.bots"]
+"universal-finance-agent" = "uaap_bot_universal_finance_agent:SPEC"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra -p no:langsmith"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+# Line length: the agent code is carried over unchanged from the kernel repository.
+ignore = ["E501"]
