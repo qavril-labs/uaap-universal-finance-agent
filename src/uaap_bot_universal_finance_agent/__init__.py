@@ -12,4 +12,8 @@ SPEC = BotSpec(
     needs_model=True,
     needs_inbox=False,
     summary="Ledger questions; drafts journal entries and reversals for approval.",
+    examples=(
+        "What does the trial balance look like as of 2026-11-30?",
+        "Accrue November rent: debit 6100, credit 2100, USD 1,250.00 on 2026-11-30.",
+    ),
 )
